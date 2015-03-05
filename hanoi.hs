@@ -52,6 +52,7 @@ findPath startState goalState = Data.Graph.AStar.aStar nextStates distance (heur
 makeState :: Int -> Int -> Int -> Hanoi
 makeState nbDisks nbPegs peg = [(if p == peg then [0..nbDisks-1] else []) | p <- [0..nbPegs-1]]
 
+printHanoiList h = mapM_ print h
 
 main = do
   args <- getArgs
@@ -68,7 +69,8 @@ main = do
               Nothing -> print "No path found!"
               Just p -> do {
                 printf "Number of steps: %d\n" (length p);
-                print p
+                print startState;
+                printHanoiList p
               }
     (_, _, _) -> printf "Usage: %s <nb-of-disks> <nb-of-pegs> <start-peg> <end-peg>\n" progName
 
